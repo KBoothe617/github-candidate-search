@@ -18,6 +18,20 @@ const CandidateSearch = () => {
     company: '',
   });
 
+  // const to hold list of candidates
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+
+  // const to hold index of the current candidate
+  const [currentCandidateIndex, setCurrentCandidateIndex] = useState<number>(0);
+
+  // const to handle the search input
+  const [searchInput, setSearchInput] = useState<string>('');
+
+  // const for error handling
+  const [error, setError] = useState<string | null>(null);
+
+  // const for no more candidates message
+  const [noMoreCandidates, setNoMoreCandidates] = useState<boolean>(false);
 
   return <h1>CandidateSearch</h1>;
 };
