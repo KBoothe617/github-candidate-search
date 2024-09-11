@@ -68,6 +68,25 @@ const CandidateSearch = () => {
     }
   };
 
+  // function to handle moving to the next candidate
+  const moveToNextCandidate = () => {
+    if (noMoreCandidates) {
+      setError('No more candidates');
+      return;
+    }
+    if (candidates.length === 0) {
+      setError('No candidates to show');
+      return;
+    }
+    if (currentCandidateIndex + 1 < candidates.length) {
+      const nextIndex = currentCandidateIndex + 1;
+      setCurrentCandidateIndex(candidates[nextIndex]);
+      setCurrentCandidateIndex(nextIndex);
+    } else {
+      setNoMoreCandidates(true);
+    }
+  }
+
   return <h1>CandidateSearch</h1>;
 };
 
