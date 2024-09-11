@@ -87,6 +87,29 @@ const CandidateSearch = () => {
     }
   }
 
+  // save candidate to local storage
+  const saveCandidate = () => {
+    if (noMoreCandidates) {
+      setError('No more candidates');
+      return;
+    }
+    if (candidates.length === 0) {
+      setError('No candidates to show');
+      return;
+    }
+    console.log('Saving candidate:', currentCandidate);
+    let parsedCandidates: Candidate[] = [];
+    const storedCandidates = localStorage.getItem('candidates');
+    if (typeof storedCandidates === 'string') {
+      parsedCandidates = JSON.parse(storedCandidates);
+    }
+    parsedCandidates.push(currentCandidate);
+    localStorage.setItem('candidates', JSON.stringify(parsedCandidates));
+    console.log('Candidates in local storage:', JSON.parse(localStorage.getItem('candidates') as string));
+    moveToNextCandidate();
+  };
+  
+
   return <h1>CandidateSearch</h1>;
 };
 
