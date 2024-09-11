@@ -33,6 +33,41 @@ const CandidateSearch = () => {
   // const for no more candidates message
   const [noMoreCandidates, setNoMoreCandidates] = useState<boolean>(false);
 
+  // const for user search input checking if the user data is not empty 
+  const handleSearch = async () => {
+    try {
+      const userData = await searchGithubUser(searchInput);
+      if (Object.keys(userData).length === 0) {
+        setError('User not found');
+        setCurrentCandidate({
+          name: '',
+          login: '',
+          location: '',
+          avatar_url: '',
+          html_url: '',
+          email: '',
+          bio: '',
+          company: '',
+        });
+      } else {
+        const fetchedCandidate: Candidate = {
+          name: userData.name || 'No name available',
+          login: userData.login,
+          location: userData.location || 'No location available',
+          avatar_url: userData.avatar_url || 'No avatar available',
+          html_url: userData.html_url || 'No address available',
+          email: userData.email || 'No email available',
+          bio: userData.bio || 'No bio available',
+          company: userData.company || 'No company available',
+        };
+        setCurrentCandidate(fetchedCandidate);
+        setError(null);
+      }
+    } catch (error) {
+      setError('Error fetching user data');
+    }
+  };
+
   return <h1>CandidateSearch</h1>;
 };
 
